@@ -1,0 +1,69 @@
+# Bitonic sequence : Sequence of numbers where numbers first increase, then decrease (no consecutive duplicates)
+# The highest number is called the peak
+
+l = [1, 3, 5, 7, 9, 11, 13, 15, 12, 9, 6, 3, 0]
+k = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 32, 1]
+def bitonic_peak(list):
+    l = 0
+    u = len(list) - 1
+    m = (l+u)//2
+    while list[m]<list[m-1] or list[m]<list[m+1]:
+        if list[m]<list[m-1]:
+            u = m
+        elif list[m]<list[m+1]:
+            l = m
+        m = (l+u)//2
+    print("{} is the bitonic peak".format(list[m]))
+
+bitonic_peak(k)
+
+
+from math import sqrt
+# Find the largest perfect square smaller than a given number
+a = 2013
+y = int(sqrt(a))
+print(y, y*y)
+
+# Don't use sqrt function
+
+def largest_square(a):
+    l = 0
+    u = a
+    m = (l+u)//2
+    i = 1
+    while 2**i < a:
+        if m*m > a:
+            u = m
+        elif m*m < a:
+            l = m
+        else:
+            print("Number itself is a square of {}".format(m))
+            return
+        m = (l+u)//2
+        i = i + 1
+        if m*m < a and (m+1)*(m+1) > a:
+            break
+    print("{} is the square smaller than {}, and {} is its square root".format(m*m, a, m))
+
+largest_square(a)
+
+
+# Now, we'll find the smallest number in a cyclically sorted list
+li = [9, 10, 13, 14, 17, 2, 3, 5, 6, 8]
+la = [6.5, 8, 10, 12.5, 18, 22.5, 28, 32.5, 33, 0.5, 3, 4.5]
+def smallest(list):
+    l = 0
+    u = len(list) - 1
+    m = (l+u)//2
+    i = 1
+    while 2**i <= len(list):
+        if list[m] < list[u]:
+            u = m
+        elif list[m] > list[u]:
+            l = m
+        m = (l+u)//2
+        i += 1
+        if list[m-1] > list[m] and list[m+1] > list[m]:
+            break
+    print("The smallest number in list is {} at index no {}".format(list[m], m))
+smallest(la)
