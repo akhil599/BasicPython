@@ -1,0 +1,29 @@
+from time import sleep
+from threading import *
+
+class A(Thread):
+    def run(self):
+        for i in range(10):
+            print("Kill")
+            sleep(1)        # This means that after printing once, execution will pause for 1 sec. This is done so that simultaneously, we can observe the output of another thread)
+
+class B(Thread):
+    def run(self):
+        for i in range(10):
+            print("Feminists")
+            sleep(1)
+
+a1 = A()
+sleep(0.2)   # This is done to avoid collision of both threads
+a2 = B()
+
+a1.start()
+a2.start()
+# At this point, there are total 3 threads: 1) Main thread, 2) a1 thread, 3) a2 thread
+# So, if we have any action performed after this point, it will be done by main thread and hence, will interfere in execution of other threads
+# To avoid this, we will ask main thread to wait for the other threads to first join back into the main thread
+
+a1.join()
+a2.join()
+
+print("Job is done")
