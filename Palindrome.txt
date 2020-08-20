@@ -1,0 +1,95 @@
+s = "Was it a cat I saw ?"
+s2 = ""
+for i in s:
+    if i.isalpha():
+        s2 = s2 + i.lower()
+
+if s2==s2[::-1]:
+    print("String is palindrome")  # It reads same from forward and backward(omitting spaces and punctuations)
+else:
+    print("String is not palindrome")
+
+# Or, we can run one iterator from left, one from right. Check if all their conditional instances are equal. Even if one is False, string is not palindrome
+
+
+
+# Now, we'll check if any permutation of a given string is palindrome
+def palindrome_permutation(s):
+    s = s.replace(" ", "")   # Replaces all spaces with empty
+    s = s.lower()
+    d = dict()
+    for i in s:
+        if i in d:
+            d[i] += 1
+        else:
+            d[i] = 1
+
+    odd = 0
+    for k, j in d.items():
+        if j%2 !=0:
+            odd += 1
+    if odd > 1:
+        print(s, end =": String is not a palindrome permutation\n")
+    else:
+        print(s, end =": String is a palindrome permutation\n")
+
+se = "Car race"
+palindrome_permutation(se)
+
+
+
+new = "sa ti Wa cat was I ?"
+# We'll check if new is an anagram of s (all characters of new and s are exactly same)
+# We should avoid sorting of strings, as it involves nlogn time complexity
+def anagram(s, new):
+    ht = dict()
+    for i in s:
+        if i in ht:
+            ht[i] += 1
+        else:
+            ht[i] = 1
+    for i in new:
+        if i in ht:
+            ht[i] -= 1
+        else:
+            ht[i] = 1
+
+    for i in ht:
+        if ht[i]!=0:
+            return False
+    return True
+
+print(anagram(s, new))
+
+
+
+# We'll check if 2 strings are permutations of each other. We'll do this without sorting
+perm1 = "Master"
+perm2 = "Tamers"
+
+def perm(perm1, perm2):
+    if len(perm1) != len(perm2):
+        print("The strings are not permutations of each other")
+        return
+    d = dict()
+    for i in perm1.lower():
+        if i in d:
+            d[i] += 1
+        else:
+            d[i] = 1
+    for i in perm2.lower():
+        if i in d:
+            d[i] -= 1
+        else:
+            d[i] = 1
+
+    for k, j in d.items():
+        if j != 0:
+            print("Strings are not permutations of each other")
+            return
+    print("Strings are permutations of each other")
+
+perm(perm1, perm2)
+
+# Using dict, we can also check if a string has all unique characters
+# To check this, we can also see if length(list) = length(set), because set does not allow duplicates
