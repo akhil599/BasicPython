@@ -1,0 +1,9 @@
+# In an array of numbers, we have to make pairs in such a manner that max(sum of numbers in pair) is minimum
+
+arr = [4, 5, 1, 4, 6, 5, 8, 7]
+# We'll make pairs of largest and smallest numbers
+# For this, we need to do sorting first, hence complexity will be O(nlogn)
+arr = sorted(arr)
+print(arr)
+for i in range((len(arr))//2):
+    print(arr[i], arr[-i-1])
