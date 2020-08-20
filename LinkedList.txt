@@ -1,0 +1,180 @@
+class Node:
+    def __init__(self,item):
+        self.data = item    # Every node comprises of 2 blocks, one is data, other is next which points to the next node
+        self.next = None
+
+class Linkedlist:
+    def __init__(self):
+        self.head = None     # Head is the position t which the pointer currently points in the list
+
+    def append(self,item):
+        newnode=Node(item)
+        if self.head == None:   # This would mean currently there are no nodes
+            self.head = newnode
+            return
+        # else we'll keep moving the head forward till it reaches the end (points to null)
+        lastnode = self.head
+        while lastnode.next is not None:
+            lastnode = lastnode.next
+        lastnode.next = newnode
+
+# In append, we add element to end of list. Now, we'll do prepend (add element to start of list
+    def prepend(self,item):
+        newnode = Node(item)
+        newnode.next = self.head    # Previous head becomes the next of new node
+        self.head = newnode         # New head will be the new node
+
+# Now, if we have to insert an element in between
+    def insert(self,previousnode,item):
+        if previousnode == None:    # This will check if previous node mentioned is there in the list or not
+            print("Previous node is not there in the list")
+            return
+        newnode = Node(item)
+        newnode.next = previousnode.next
+        previousnode.next = newnode
+
+
+    def delete(self,item):
+        currentnode = self.head
+        if currentnode is not None and currentnode.data==item:      # If the node to be deleted is the head node
+            self.head = currentnode.next
+            currentnode = None
+            return
+
+        prev = None
+        while currentnode is not None and currentnode.data!=item:
+            prev=currentnode
+            currentnode=currentnode.next
+
+        if currentnode is None:
+            print("Item to be deleted is not present in the list")
+            return
+        prev.next = currentnode.next
+        currentnode = None
+
+
+    def deleteposition(self,pos):
+        currentnode = self.head
+        if pos == 0:
+            self.head = currentnode.next
+            currentnode = None
+            return
+
+        prev = None
+        count = 0
+        while currentnode is not None and count!=pos:
+            prev = currentnode
+            currentnode = currentnode.next
+            count = count + 1
+
+        if currentnode is None:
+            print("Position to be deleted is not present in the list")
+            return
+        prev.next = currentnode.next
+        currentnode = None
+
+    def swap(self, item1, item2):
+        if item1==item2:
+            print("There is nothing to swap")
+            return
+        prev1 = None
+        curr1 = self.head
+        while curr1 is not None and curr1.data != item1:
+            prev1 = curr1
+            curr1 = curr1.next
+
+        prev2 = None
+        curr2 = self.head
+        while curr2 is not None and curr2.data != item2:
+            prev2 = curr2
+            curr2 = curr2.next
+
+        if curr1 is None or curr2 is None:
+            print("One or both of the elements do not exist")
+            return
+# If none of the nodes to be searched is a head note:
+        if prev1 is not None:
+            prev1.next = curr2
+        else:
+            self.head = curr2
+        if prev2 is not None:
+            prev2.next = curr1
+        else:
+            self.head = curr1
+        curr1.next, curr2.next = curr2.next, curr1.next
+
+    def reverse(self):
+        prev = None
+        curr = self.head
+        while curr is not None:
+            n = curr.next
+            curr.next = prev
+            prev = curr
+            curr = n
+        self.head = prev
+
+    def remove_dulpicates(self):
+        prev = None
+        curr = self.head
+        duplicates = dict()
+        while curr is not None:
+            if curr.data in duplicates:
+                # Delete the node
+                prev.next = curr.next
+                curr = None
+            else:
+                duplicates[curr.data] = 1
+                prev = curr
+            curr = prev.next
+
+
+    def print(self):
+        currentnode = self.head
+        while currentnode is not None:
+            print(currentnode.data)
+            currentnode = currentnode.next
+
+    def length(self):
+        count = 0
+        currentnode = self.head
+        while currentnode is not None:
+            count+=1
+            currentnode = currentnode.next
+        return count
+
+x = Linkedlist()
+x.append("A")
+x.append("K")
+x.append("H")
+x.append("I")
+x.prepend("L")
+x.insert(x.head.next, "T")
+x.print()
+
+print("\n")
+x.delete("K")
+x.print()
+
+print("\n")
+x.deleteposition(3)    # This position no is similar to index no in list
+x.print()
+print(x.length(), end = " is the length of list")
+
+print("\n")
+x.swap("A", "I")
+x.print()
+
+print("\n")
+x.reverse()
+x.print()
+
+print("\n")
+y = Linkedlist()
+y.append("F")
+y.append("A")
+y.append("B")
+y.append("A")
+y.append("B")
+y.append("E")
+y.remove_dulpicates()
+y.print()
