@@ -1,0 +1,29 @@
+import pyodbc
+
+# Printing the drivers present on network
+for i in pyodbc.drivers():
+    print(i)
+
+cnxn = pyodbc.connect(DRIVER='SQL Server Native Client 11.0',SERVER='LAPTOP-S8BA2L9E\SQLEXPRESS',DATABASE='master',Trusted_Connection='yes')
+
+# Creating a cursor
+cursor=cnxn.cursor()
+
+# Defining a query
+query = 'insert into final(FirstName,LastName,emailID,Creationdate) values (?,?,?,?)'
+
+# Defining values to insert
+values = ('Rajneeti','Chopra','chaaploos@batch.com','18 April 1963')
+
+# Inserting the values
+cursor.execute(query,values)
+
+# Committing the insert
+cnxn.commit()
+
+# Grabbing all the rows of database
+cursor.execute('select * from final')
+
+# Printing all the rows of database
+for row in cursor:
+    print(row)
