@@ -1,0 +1,45 @@
+import time
+
+list1=[]
+n = int(input("Enter the number of values you want to type"))
+for i in range(0,n):
+    list1.append(int(input("Enter the next value")))
+
+list2 = sorted(list1)
+print(list2)
+print(list1, end=" is without sorting\n")
+
+
+# OR use bubble sort (Swapping technique)
+m = len(list1)
+k = 0
+start1=time.time()
+while k < len(list1):
+    i = 0
+    while i < m-1:
+        if list1[i] > list1[i + 1]:
+            z = list1[i]
+            list1[i] = list1[i + 1]
+            list1[i + 1] = z
+        i = i + 1
+    m = m - 1
+    k = k + 1
+end1=time.time()
+print(list1, end=" is after bubble sort\n")
+print("Execution time is {}".format(end1-start1))
+
+
+# If we do sorting using min max concept, that is selection sort.
+# Find the min value, keep it in 1st place. Find min among remaining, place it in 2nd place, and so on.
+
+start2=time.time()
+for j in range(0,len(list1)):
+    for k in range(k+1,len(list1)):
+        if list1[j] > list1[k]:
+            a = list1[j]
+            list1[j] = list1[k]
+            list1[k] = a
+end2=time.time()
+
+print(list1, end=" is after selection sort\n")
+print("Execution time is {}".format(end2-start2))
