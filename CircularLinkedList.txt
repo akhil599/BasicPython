@@ -1,0 +1,50 @@
+class Node:
+    def __init__(self,item):
+        self.data = item
+        self.next = None
+
+class Circular_Linked_List:
+    def __init__(self):
+        self.head = None
+
+    def append(self,item):
+        newnode = Node(item)
+        if self.head == None:
+            self.head = newnode
+            newnode.next = self.head
+            return
+        curr = self.head
+        while curr.next != self.head:
+            curr = curr.next
+        curr.next = newnode
+        newnode.next = self.head
+
+    def prepend(self,item):
+        newnode = Node(item)
+        if self.head == None:
+            self.head = newnode
+            newnode.next = self.head
+            return
+        curr = self.head
+        while curr.next != self.head:
+            curr = curr.next
+        curr.next = newnode
+        newnode.next = self.head
+        self.head = newnode
+
+    def print(self):
+        current = self.head
+        while current.next != self.head:
+            print(current.data)
+            current = current.next
+        print(current.data)
+
+
+x = Circular_Linked_List()
+x.append("K")
+x.append("A")
+x.append("N")
+x.prepend("I")
+x.prepend("T")
+x.prepend("A")
+x.print()
