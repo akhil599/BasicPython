@@ -1,0 +1,48 @@
+# We'll do this without using str function
+
+def int_to_str(integer):
+    if integer < 0:
+        negative = True
+        integer *= -1
+    else:
+        negative = False
+    output = []
+    while integer > 0:
+        a = integer % 10
+        output.append(chr(ord("0") + a))
+        integer = integer // 10
+    output = output[::-1]                # This will reverse the entire list
+    print(output)
+    output = "".join(output)             # This will join all elements of list into string with "" in between
+    if negative:
+        print("-" + output)
+    else:
+        print(output)
+
+# ord() gives the unicode of a character
+# chr() gives the character corresponding to a unicode
+integer = -22031999
+int_to_str(integer)
+# We could have also simply used str(integer)
+
+
+def str_to_int(input):
+    output = 0
+    if input[0]=="-":
+        start = 1
+        negative = True
+    else:
+        start = 0
+        negative = False
+    for i in range(start, len(input)):
+        place = 10**(len(input)-(i+1))
+        digit = ord(input[i]) - ord("0")
+        output += place*digit
+    if negative:
+        print(-1*output)
+    else:
+        print(output)
+
+string = "-13101999"
+str_to_int(string)
+# We could have simply done int(string)
