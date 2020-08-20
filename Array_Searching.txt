@@ -1,0 +1,72 @@
+position = 1
+
+def search(list,x):
+    for i in range(0,len(list)):
+        if list[i]==x:
+            globals()["position"] = i+1
+            return True
+    return False
+
+
+list1=[1,2.5,4,5.5,7,8.5,10,11.5,13]
+n=float(input("Enter the value you want to search"))
+if search(list1,n):
+    print("Value is present in the list at position {}".format(position))
+else:
+    print("Value is not present in the list")
+
+
+# This was linear search. For lists of longer length, binary search is faster.
+# For binary search, the list must be sorted (increasing order)
+
+pos = 1
+
+def searchfast(list,x):
+    l = 0
+    u = len(list2) - 1
+    i = 1
+    while (2^i)<len(list):
+        m = int((l + u) / 2)
+        if list[m] == x:
+            globals()["pos"] = m + 1
+            return True
+# If there are duplicates, and we want the first instance of duplicate, we can use a loop after this point, which progresses leftwards in each step
+        else:
+            if list[m] > x:
+                u = m
+            elif list[m] < x:
+                l = m
+        i = i + 1
+    return False
+
+list2=[0,1.5,3,4.5,6,7.5,9,10.5,12,13.5,15,16.5,18,19.5,21,22.5,24,25.5,27,28.5,30]
+p = float(input("Enter the value you want to search"))
+if searchfast(list2,p):
+    print("Value is present in the list at position {}\n".format(pos))
+else:
+    print("Value is not present in the list\n")
+
+
+# Now, using binary search, we'll write a function to find the closest value in a sorted array
+def closest(list,x):    # this function can alos be used to insert an element into a list such that it remains sorted
+    l = 0
+    u = len(list2) - 1
+    i = 1
+    while u-l != 1:
+        m = (l + u) // 2
+        if x > list[m]:
+            l = m
+        else:
+            u = m
+    if list[u] - x > x - list[l]:
+        print("{} is the closest value".format(list[l]))
+    elif list[u] - x < x - list[l]:
+        print("{} is the closest value".format(list[u]))
+    else:
+        print("{} and {} are the closest values".format(list[u], list[l]))
+
+q = float(input("Enter the value whose closest you want to search"))
+if searchfast(list2, q):
+    print("Value itself is present in the list")
+else:
+    closest(list2, q)
