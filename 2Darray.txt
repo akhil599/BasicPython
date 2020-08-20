@@ -1,0 +1,29 @@
+import numpy
+arr1=numpy.array([[1,1,1],[1,1,1],[1,1,1]])
+arr2=numpy.array([[1,1,1],[1,1,1],[1,1,1]])
+
+for i in range(0,3):
+   for j in range(0,3):
+       arr1[i][j]=int(input("Enter the next value in matrix 1"))
+
+for i in range(0,3):
+   for j in range(0,3):
+       arr2[i][j]=int(input("Enter the next value in matrix 2"))
+
+print(arr1)
+print(arr2)
+
+c=numpy.array([[1,1,1],[1,1,1],[1,1,1]])
+for i in range(0,3):
+    for j in range(0,3):
+        c[i][j]=0
+        for k in range(0,3):
+            c[i][j]=c[i][j]+(arr1[i][k])*(arr2[k][j])
+
+print("The matrix obtained after multiplying these 2 matrices is:")
+print(c)
+
+m1 = numpy.matrix(arr1)
+m2 = numpy.matrix(arr2)
+m3 = m1*m2
+print(m3)
