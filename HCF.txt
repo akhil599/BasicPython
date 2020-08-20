@@ -1,0 +1,46 @@
+# This is to find the HCF or GCD(greatest common divisor) of 2 numbers
+a = int(input("Enter 1st number"))
+b = int(input("Enter 2nd number"))
+
+afactors = []
+bfactors = []
+
+for i in range(1,a):
+    if a%i == 0:
+        afactors.append(i)
+
+for i in range(1,b):
+    if b%i == 0:
+        bfactors.append(i)
+
+common = []
+
+for i in afactors:
+    if i in bfactors:
+        common.append(i)
+
+print(common[-1], end=" is the HCF of numbers\n")
+print(common, end=" are the common factors\n")
+
+
+# Method 2. we need only afactors.
+x = 1
+for i in afactors:
+    if b%i == 0:
+        x = i
+
+print(x, end=" is the HCF by shorter method\n")
+
+# Method 3. No lists are needed
+y = 1
+for i in range(1,min(a,b)+1):
+    if a%i==0 and b%i==0:
+        y=i
+print(y, end=" is the largest common factor\n")
+
+# Method 4. Scan backwards
+for i in range(min(a,b),1):
+    if a%i==0 and b%i==0:
+        y=i
+        break;
+print(y, end=" is the GCD")
