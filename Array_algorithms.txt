@@ -1,0 +1,51 @@
+x = [1, 2, 2, 0, 1, 1, 0]
+i = 0
+furrea = 1  # furthest reach
+while i < len(x) and (i+1) <= furrea:
+    if i + x[i] + 1 > len(x):
+        furrea = len(x)
+        break
+    else:
+        a = i + x[i] + 1
+        furrea = max(a, furrea)
+        i = i+1
+
+
+if furrea == len(x):
+    print("It is possible to reach the end")
+else:
+    print("It is not possible to reach the end")
+
+
+
+
+# arbitrary increment (Scorecard increments)
+p = int(input("Enter the number of digts in number"))
+arr = []
+for i in range(p):
+    z = int(input("Enter digit no {}".format(i+1)))
+    while z >= 10:
+        z = int(input(("Please enter a number below 10")))
+    arr.append(z)
+
+q=10
+while q>=10:
+    q = int(input("Please enter a digit below 10 that you want to add"))
+
+arr[-1] = arr[-1] + q
+if arr[-1] < 10:
+    print(arr, end = " is the answer")
+else:
+    i = 0
+    while arr[-1 - i] >= 10 and i<len(arr)-1:
+        arr[-1 - i] = arr[-1 - i] - 10
+        i += 1
+        arr[-1 - i] += 1
+    if arr[0] >= 10:
+        arr[0] = arr[0] - 10
+        arr.append(arr[-1])
+        b = len(arr)
+        for i in range(b-2):
+            arr[-2-i] = arr[-3-i]
+        arr[0] = (arr[0]+10)//10
+    print(arr, end = " is the answer")
