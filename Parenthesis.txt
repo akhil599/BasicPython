@@ -1,0 +1,38 @@
+from Stack import Stack      # importing Stack class from Stack.py
+# This is to check whether a string has balanced set of brackets or not
+
+def match(p,q):
+    if p =="(" and q==")":
+        return True
+    elif p == "{" and q == "}":
+        return True
+    elif p == "[" and q == "]":
+        return True
+    else:
+        return False
+
+def check(string):
+    a = Stack()
+    balance = True
+    i = 0
+
+    while i < len(string) and balance:
+        x = string[i]
+        if x in "{[(":
+            a.push(x)
+        else:
+            if a.checkempty():
+                balance = False
+            else:
+                top = a.pop()
+                if match(top,x)==False:
+                    balance = False
+        i = i+1
+
+    if a.checkempty() and balance:
+        return True
+    else:
+        return False
+
+s = str(input("Enter a string of brackets"))
+print(check(s))
