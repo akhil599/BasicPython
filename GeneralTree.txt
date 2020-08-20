@@ -1,0 +1,57 @@
+class GeneralTree:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+        self.parent = None          # For the first node(root), there won't be any parent
+
+    def insert(self, child):
+        child.parent = self         # The root node will be parent
+        self.children.append(child)
+
+    def print(self):                # To print normally
+        print(self.data)
+        if self.children:
+            for child in self.children:
+                child.print()
+
+    def print2(self):                # To print along with some prefix, which tells us about the hierarchy
+        prefix = "|__" * self.getlevel()
+        print(prefix + self.data)
+        if self.children:
+            for child in self.children:
+                child.print2()
+
+    def getlevel(self):
+        level = 0
+        p = self.parent
+        while p is not None:
+            level += 1
+            p = p.parent
+        return level
+
+root = GeneralTree("Fruits")
+fruit1 = GeneralTree("Banana") # We do this, so that Banana can have further its children and parent as well
+root.insert(fruit1)            # We can't use root.insert("Banana"), because that banana won't be a node, it will be just an object
+
+fruit2 = GeneralTree("Melon")
+fruit3 = GeneralTree("Apple")
+root.insert(fruit2)
+root.insert(fruit3)
+
+fruit1.insert(GeneralTree("Orange"))
+fruit1.insert(GeneralTree("Mosambi"))
+fruit1.insert(GeneralTree("Pomegranate"))
+
+fruit2.insert(GeneralTree("Papaya"))
+fruit2.insert(GeneralTree("Watermelon"))
+fruit2.insert(GeneralTree("Mango"))
+
+fruit3.insert(GeneralTree("Pear"))
+fruit3.insert(GeneralTree("Guava"))
+fruit3.insert(GeneralTree("Peach"))
+
+root.print()
+print(fruit1.getlevel())
+
+print("\n")
+root.print2()
